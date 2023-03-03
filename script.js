@@ -1,15 +1,37 @@
-// Define the array of strings
-const strings = ['D1', 'E1', 'F1', 'C2', 'D2', 'E2', 'F2', 'G2', 'B3', 'C3', 'D3', 'E3', 'F3', 'G3', 'B4', 'C4', 'D4', 'E4', 'F4', 'G4', 'H4', 'B5', 'C5', 'D5', 'E5', 'F5', 'G5', 'H5', 'B6', 'C6', 'D6', 'E6', 'F6', 'G6', 'H6', 'C7', 'D7', 'E7', 'F7', 'G7', 'H7', 'D8', 'E8', 'F8', 'G8'];
+const rows = 10;
+const columns = 10;
+const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
-// Get references to the button and result elements
-const button = document.getElementById('generate');
+// Generate the grid
+const gridContainer = document.getElementById('grid-container');
+for (let i = 0; i < rows + 1; i++) {
+    for (let j = 0; j < columns + 1; j++) {
+        const cell = document.createElement('div');
+        if (i === 0 && j > 0) {
+            // Add letter headers
+            cell.textContent = letters[j - 1];
+            cell.classList.add('header');
+        } else if (j === 0 && i > 0) {
+            // Add number headers
+            cell.textContent = i - 1;
+            cell.classList.add('header');
+        } else {
+            // Add empty cells
+            cell.dataset.coordinate = `${letters[j - 1]}${i - 1}`;
+        }
+        gridContainer.appendChild(cell);
+    }
+}
+
+// Select random drop site
+const randomButton = document.getElementById('random-button');
 const result = document.getElementById('result');
-
-// Add an event listener to the button
-button.addEventListener('click', () => {
-    // Generate a random index within the range of the array
-    const randomIndex = Math.floor(Math.random() * strings.length);
-
-    // Display the randomly selected string on the screen
-    result.textContent = strings[randomIndex];
+randomButton.addEventListener('click', () => {
+    const cells = document.querySelectorAll('#grid-container div:not(.header)');
+    const randomCell = cells[Math.floor(Math.random() * cells.length)];
+    const coordinate = randomCell.dataset.coordinate;
+    result.textContent = `Selected Drop Site: ${coordinate}`;
+    // Highlight selected cell
+    cells.forEach(cell => cell.classList.remove('selected'));
+    randomCell.classList.add('selected');
 });
