@@ -86,3 +86,8 @@ h3 {
     background-color: #1a73e8;
     color: #ffffff;
 }
+
+.invalid-drop {
+    background-color: #f0f0f0;
+    color: #ccc;
+}

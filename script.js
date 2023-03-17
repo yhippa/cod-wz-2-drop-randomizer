@@ -1,8 +1,11 @@
 const randomDropBtn = document.getElementById('random-drop-btn');
 const dropResult = document.getElementById('drop-result');
 const historyList = document.getElementById('history-list');
-
 const dropGrid = document.getElementById('drop-grid');
+const validDrops = [
+    'D1', 'E1', 'F1', 'C2', 'D2', 'E2', 'F2', 'G2', 'B3', 'C3', 'D3', 'E3', 'F3', 'G3', 'B4', 'C4', 'D4', 'E4', 'F4', 'G4', 'H4', 'B5', 'C5', 'D5', 'E5', 'F5', 'G5', 'H5', 'B5', 'C6', 'D6', 'E6', 'F6', 'G6', 'H6', 'C7', 'D7', 'E7', 'F7', 'G7', 'H7', 'D8', 'E8', 'F8', 'G8'
+];
+
 
 function createGrid() {
     const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
@@ -17,8 +20,14 @@ function createGrid() {
 
         for (let j = 0; j < columns.length; j++) {
             const cell = document.createElement('td');
-            cell.id = `${columns[j]}${i}`;
+            const cellId = `${columns[j]}${i}`;
+            cell.id = cellId;
             row.appendChild(cell);
+
+            // Check if the cell is not within the valid drop list
+            if (!validDrops.includes(cellId)) {
+                cell.classList.add('invalid-drop');
+            }
         }
 
         tbody.appendChild(row);
@@ -26,10 +35,6 @@ function createGrid() {
 }
 
 createGrid();
-
-const validDrops = [
-    'D1', 'E1', 'F1', 'C2', 'D2', 'E2', 'F2', 'G2', 'B3', 'C3', 'D3', 'E3', 'F3', 'G3', 'B4', 'C4', 'D4', 'E4', 'F4', 'G4', 'H4', 'B5', 'C5', 'D5', 'E5', 'F5', 'G5', 'H5', 'B5', 'C6', 'D6', 'E6', 'F6', 'G6', 'H6', 'C7', 'D7', 'E7', 'F7', 'G7', 'H7', 'D8', 'E8', 'F8', 'G8'
-];
 
 function getRandomDrop() {
     const randomIndex = Math.floor(Math.random() * validDrops.length);
