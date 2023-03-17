@@ -59,3 +59,30 @@ h3 {
     font-size: 1rem;
     margin-bottom: 5px;
 }
+
+.grid-container {
+    margin-top: 30px;
+}
+
+#drop-grid {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+#drop-grid th,
+#drop-grid td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    min-width: 40px;
+}
+
+#drop-grid th {
+    background-color: #1a73e8;
+    color: #ffffff;
+}
+
+.selected-drop {
+    background-color: #1a73e8;
+    color: #ffffff;
+}
